@@ -1,0 +1,16 @@
+{
+  "name": "app-03",
+  "version": "0.0.1",
+  "description": "Simple multiplication table that includes a txt file",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "base3": "node app --base=3"
+  },
+  "author": "Manuel Pineda",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "yargs": "^17.5.1"
+  }
+}

@@ -47,7 +47,7 @@ const id = 3;
 
 getInfoEmployee(id)
   .then((msg) => {
-    // If we use the return in the cath
+    // If we use the return in the catch
     console.log("Everything went OK");
     console.log(msg);
   })

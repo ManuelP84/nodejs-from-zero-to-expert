@@ -1,23 +1,28 @@
 const fs = require("fs");
+const colors = require("colors");
 
-const createFile = async (base) => {
+const createFile = async (base, list, to) => {
   try {
-    console.log("=====================================");
-    console.log(`*****MULTIPLICATION TABLE OF ${base}*****`);
-    console.log("=====================================");
-
     let output = "";
-    const filename = `table-${base}.txt`;
+    let consoleOutput = "";
+    let fileName = `table-${base}.txt`;
 
-    for (let index = 1; index <= 10; index++) {
-      output += `${base} x ${index} equals: ${base * index}\n`;
+    for (let index = 1; index <= to; index++) {
+      consoleOutput += `${colors.yellow(base)} ${'x'.blue} ${colors.yellow(index)} ${'='.blue} ${colors.yellow(base * index)}\n`;
+      output += `${base} x ${index} = ${base * index}\n`;
     }
 
-    fs.writeFileSync(filename, output);
+    fs.writeFileSync(`./output/${fileName}`, output);
 
-    console.log(output);
-    return filename;
-    
+    if (list) {
+      console.log("=====================================".blue);
+      console.log('**** '.green, 'Multiplication table of:'.green, colors.yellow(base), ' ****'.green);
+      console.log("=====================================".blue);
+      console.log(consoleOutput);
+    } else {
+      fileName = null;
+    }
+    return fileName;
   } catch (error) {
     throw error;
   }

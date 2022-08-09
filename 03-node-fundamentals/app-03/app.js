@@ -1,24 +1,12 @@
 const { createFile } = require("./helpers/createFile");
-const argv = require('yargs').argv;
+const argv = require('./config/yargs');
+const colors = require('colors');
 
-// Exercise 3.
 
 console.clear();
 
+//console.log(argv);
 
-// 1. Old method to recive the base by the command line "--base=number"
-
-// const [ , , arg3 = 'base=5'] = process.argv;
-// const [ , base = 5] = arg3.split('='); 
-// console.log(base);
-
-// 2. Best method is using yargs
-console.log(argv);
-console.log('base: yargs', argv);
-
-
-const base = 6;
-
-createFile(base)
-  .then((fileName) => console.log(fileName, "created"))
+createFile(argv.b, argv.l, argv.t)
+  .then((fileName) => fileName && console.log(`${fileName} created`.green))
   .catch((error) => console.log(error));

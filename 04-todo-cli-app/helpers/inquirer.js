@@ -11,31 +11,31 @@ const inquirerMenu = async () => {
       choices: [
         {
           value: "1",
-          name: "1. Create a new todo",
+          name: `${'1.'.green} Create a new task`,
         },
         {
           value: "2",
-          name: "2. List todo's",
+          name: `${'2.'.green} List all task's`,
         },
         {
           value: "3",
-          name: "3. List todo's completed",
+          name: `${'3.'.green} List of task's completed`,
         },
         {
           value: "4",
-          name: "4. List todo's completed",
+          name: `${'4.'.green} List of task's pending`,
         },
         {
           value: "5",
-          name: "5. List todo's pending",
+          name: `${'5.'.green} Complete task`,
         },
         {
           value: "6",
-          name: "6. Delete todo",
+          name: `${'6.'.green} Delete task`,
         },
         {
           value: "0",
-          name: "0. Exit",
+          name: `${'0.'.green} Exit`,
         },
       ],
     },
@@ -43,11 +43,10 @@ const inquirerMenu = async () => {
 
   console.clear();
   console.log("======================".green);
-  console.log("   Select an option".green);
+  console.log("   Select an option".white);
   console.log("======================".green);
 
   const { option } = await inquirer.prompt(menuOptions);
-  console.log(option);
 
   return option;
 };
@@ -66,7 +65,27 @@ const inquirerPause = async () => {
   await inquirer.prompt(pauseOption);
 };
 
+const readInput = async (message) => {
+  const question = [
+    {
+      type: 'input',
+      name: 'userInput',
+      message,
+      validate(value){
+        if(value.length === 0){
+          return 'Please enter a valid value!';
+        }
+        return true;
+      }
+    }
+  ];
+
+  const { userInput } = await inquirer.prompt(question);
+  return userInput;
+}
+
 module.exports = {
   inquirerMenu,
   inquirerPause,
+  readInput,
 };

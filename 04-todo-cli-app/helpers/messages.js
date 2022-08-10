@@ -1,5 +1,4 @@
 const colors = require("colors");
-const { resolve } = require("path");
 
 const showMenu = () => {
   return new Promise((resolve) => {

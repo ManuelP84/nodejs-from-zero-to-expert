@@ -8,6 +8,8 @@ const {
   inquirerMenu,
   inquirerPause,
   readInput,
+  listTasksToDelete,
+  confirm,
 } = require("./helpers/inquirer");
 
 const app = async () => {
@@ -52,6 +54,20 @@ const app = async () => {
         // List pending tasks
         tasks.listDoneTasks(false);
 
+        break;
+
+      case "5":
+        // Complete tasks
+
+        break;
+
+      case "6":
+        // Delete tasks
+        const id = await listTasksToDelete(tasks.listArray);
+        if (id !== "0") {
+          const ok = await confirm("Are you sure you want to delete?");
+          ok && tasks.deleteTask(id);
+        }
         break;
     }
 

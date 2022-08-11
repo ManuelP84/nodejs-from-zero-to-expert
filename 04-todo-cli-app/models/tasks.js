@@ -51,12 +51,24 @@ class Tasks {
     let index = 1;
     this.listArray.forEach((task) => {
       if (completed && task.isDone) {
-        console.log(`${(index + ".").toString().green} ${task.description} :: ${"completed!".green} :: ${task.isDone}`);
+        console.log(`${(index + ".").toString().green} ${task.description} :: ${"completed!".green} :: ${task.isDone.toString().green}`);
         index++;
       }
       if (!completed && !task.isDone) {
         console.log(`${(index + ".").toString().green} ${task.description} :: ${"pending...".red}`);
         index++;
+      }
+    });
+  }
+
+  completeTask(ids = []) {
+    this.listArray.forEach(t => {
+      
+      const task = this._list[t.id]; // In javascript the real object is updated because this assigment only takes the reference and it doent create a copy of the object.
+      if(ids.includes(t.id)){
+        task.isDone = new Date().toISOString();
+      } else {
+        task.isDone = null;
       }
     });
   }

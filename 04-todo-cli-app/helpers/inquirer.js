@@ -97,7 +97,7 @@ const listTasksToDelete = async (tasks) => {
     name: `${"0.".green} ${"Cancel"}`,
   });
 
-  const questions = [
+  const question = [
     {
       type: "list",
       name: "id",
@@ -106,7 +106,7 @@ const listTasksToDelete = async (tasks) => {
     },
   ];
 
-  const { id } = await inquirer.prompt(questions);
+  const { id } = await inquirer.prompt(question);
 
   return id;
 };
@@ -125,10 +125,34 @@ const confirm = async (message) => {
   return ok;
 };
 
+const showListCheckbox = async (tasks) => {
+  const choices = tasks.map((task, index) => {
+    return {
+      value: task.id,
+      name: `${(index + 1).toString().green + ".".green} ${task.description}`,
+      checked: task.isDone ? true : false,
+    };
+  });
+
+  const question = [
+    {
+      type: "checkbox",
+      name: "ids",
+      message: "Selections",
+      choices,
+    },
+  ];
+
+  const { ids } = await inquirer.prompt(question);
+
+  return ids;
+};
+
 module.exports = {
   inquirerMenu,
   inquirerPause,
   readInput,
   listTasksToDelete,
   confirm,
+  showListCheckbox,
 };

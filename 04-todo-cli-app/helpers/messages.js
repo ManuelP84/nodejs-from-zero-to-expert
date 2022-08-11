@@ -1,4 +1,4 @@
-const colors = require("colors");
+/* const colors = require("colors");
 
 const showMenu = () => {
   return new Promise((resolve) => {
@@ -45,3 +45,4 @@ module.exports = {
   showMenu,
   pause,
 };
+ */

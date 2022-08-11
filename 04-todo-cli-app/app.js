@@ -10,6 +10,7 @@ const {
   readInput,
   listTasksToDelete,
   confirm,
+  showListCheckbox,
 } = require("./helpers/inquirer");
 
 const app = async () => {
@@ -18,7 +19,6 @@ const app = async () => {
   const tasksDb = readFile();
 
   if (tasksDb) {
-    // Establecer tasks
     tasks.loadTasksFromDb(tasksDb);
   }
 
@@ -58,6 +58,9 @@ const app = async () => {
 
       case "5":
         // Complete tasks
+        const ids = await showListCheckbox(tasks.listArray);
+        //console.log(ids);
+        tasks.completeTask(ids);
 
         break;
 

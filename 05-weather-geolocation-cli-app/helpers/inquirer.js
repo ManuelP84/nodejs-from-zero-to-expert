@@ -37,7 +37,7 @@ const inquirerMenu = async () => {
 
 // Function to create a pause
 const inquirerPause = async () => {
-  const pauseOption = [
+  const pause = [
     {
       type: "input",
       name: "pause",
@@ -46,7 +46,7 @@ const inquirerPause = async () => {
   ];
 
   console.log("\n");
-  await inquirer.prompt(pauseOption);
+  await inquirer.prompt(pause);
 };
 
 // Function to read an input from the system
@@ -69,11 +69,12 @@ const readInput = async (message) => {
   return userInput;
 };
 
-const listTasksToDelete = async (tasks) => {
-  const choices = tasks.map((task, index) => {
+// Function to list all the places in the console
+const listPlaces = async (places) => {
+  const choices = places.map((place, index) => {
     return {
-      value: task.id,
-      name: `${(index + 1).toString().green + ".".green} ${task.description}`,
+      value: place.id,
+      name: `${(index + 1).toString().green + ".".green} ${place.name}`,
     };
   });
 
@@ -86,7 +87,7 @@ const listTasksToDelete = async (tasks) => {
     {
       type: "list",
       name: "id",
-      message: "Delete",
+      message: "Select the place",
       choices,
     },
   ];
@@ -96,48 +97,10 @@ const listTasksToDelete = async (tasks) => {
   return id;
 };
 
-const confirm = async (message) => {
-  const question = [
-    {
-      type: "confirm",
-      name: "ok",
-      message,
-    },
-  ];
-
-  const { ok } = await inquirer.prompt(question);
-
-  return ok;
-};
-
-const showListCheckbox = async (tasks) => {
-  const choices = tasks.map((task, index) => {
-    return {
-      value: task.id,
-      name: `${(index + 1).toString().green + ".".green} ${task.description}`,
-      checked: task.isDone ? true : false,
-    };
-  });
-
-  const question = [
-    {
-      type: "checkbox",
-      name: "ids",
-      message: "Selections",
-      choices,
-    },
-  ];
-
-  const { ids } = await inquirer.prompt(question);
-
-  return ids;
-};
 
 module.exports = {
   inquirerMenu,
   inquirerPause,
   readInput,
-  listTasksToDelete,
-  confirm,
-  showListCheckbox,
+  listPlaces,
 };
